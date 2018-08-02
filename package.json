@@ -1,0 +1,26 @@
+{
+  "name": "capture",
+  "version": "1.0.0",
+  "description": "The library gives you the ability to drag and drop files and get their contents on client-side!",
+  "main": "capture.js",
+  "scripts": {
+    "start": "node capture.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ph0enixKM/capture.git"
+  },
+  "keywords": [
+    "capture",
+    "drag",
+    "and",
+    "drop",
+    "files"
+  ],
+  "author": "Phoenix Arts",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ph0enixKM/capture/issues"
+  },
+  "homepage": "https://github.com/Ph0enixKM/capture#readme"
+}

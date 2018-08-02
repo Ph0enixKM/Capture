@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Capture</title>
+    <script src="capture.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div class="capture"></div>
+    <input type="submit">
+    <script>
+      let capture = new Capture({images: true})
+
+      let submit = document.querySelector('input')
+      submit.addEventListener('click', () => {
+        alert(capture.getFiles())
+      })
+
+    </script>
+  </body>
+</html>
