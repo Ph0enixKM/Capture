@@ -19,14 +19,14 @@
     * @param {images} images_only
   */
 
-  window.Capture = class Main {
+  window.FileCapture = class Main {
     constructor(obj) {
       if (typeof obj !== 'undefined') {
-        this.all = !obj.images || true
-      }
+        this.all = true//!obj.images || true
+      } else { this.all == true }
 
       window.addEventListener('DOMContentLoaded', () => {
-        let dropzones = document.querySelectorAll('.capture')
+        let dropzones = document.querySelectorAll('.file-capture')
         addStyle()
         prepareDrops(dropzones)
         dragOver(dropzones)
@@ -85,11 +85,11 @@
 
         let icon = document.createElement('div')
         icon.style.backgroundImage = `url('${(image) ? file : FILE_ICON}')`
-        icon.className = 'capture-icon'
+        icon.className = 'file-capture-icon'
         icon.setAttribute('title', name)
         icon.setAttribute('index', index)
         drop.appendChild(icon)
-        tippy(`.capture-icon[index="${index}"]`)
+        tippy(`.file-capture-icon[index="${index}"]`)
         icon.addEventListener('click', e => {
           let index = parseInt(e.target.getAttribute('index'))
           let parent = e.target.parentElement
@@ -122,7 +122,7 @@
       function addStyle () {
         document.head.innerHTML += `
         <style>
-        .capture {
+        .file-capture {
           text-align: center;
           min-height: 100px;
           padding: 50px;
@@ -133,7 +133,7 @@
           background-position: center;
           transition: 300ms;
         }
-        .capture-icon {
+        .file-capture-icon {
           display: inline-block;
           box-shadow: 0 0 10px black;
           border-radius: 50px;
@@ -147,7 +147,7 @@
           background-size: cover;
           position: relative;
         }
-        .capture-icon::after{
+        .file-capture-icon::after{
           content: "";
           position: absolute;
           top: 0;
@@ -164,7 +164,7 @@
           transition: 300ms;
           cursor: pointer;
         }
-        .capture-icon:hover::after{
+        .file-capture-icon:hover::after{
           border-radius: 50px;
           transform: scale(1);
           opacity: 1;
@@ -198,7 +198,7 @@
     }
 
     getFiles () {
-      let dropzones = document.querySelectorAll('.capture')
+      let dropzones = document.querySelectorAll('.file-capture')
       let files = []
       for (let drop of dropzones) {
         let cont = JSON.parse(drop.getAttribute('files'))
