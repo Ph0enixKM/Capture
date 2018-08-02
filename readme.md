@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/Ph0enixKM/Capture/logo.png">
+  <img src="https://github.com/Ph0enixKM/Capture/blob/master/logo.png">
   <br>
   <br>
 </div>
