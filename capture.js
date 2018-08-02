@@ -131,7 +131,6 @@
           background-repeat: no-repeat;
           background-size: contain;
           background-position: center;
-          transition: 300ms;
         }
         .file-capture-icon {
           display: inline-block;
