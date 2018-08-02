@@ -50,7 +50,7 @@
 
             for (var i = 0; i < e.dataTransfer.items.length; i++) {
               if (e.dataTransfer.items[i].kind === 'file') {
-                var file = e.dataTransfer.items[i].getAsFile()
+                let file = e.dataTransfer.items[i].getAsFile()
                 if (all) {
                   if (file.type.match(/image.*/)) {
                     openFile(file, drop, true, file.name)
@@ -63,6 +63,22 @@
                   }
                 }
               }
+            }
+          })
+          drop.addEventListener('click', e => {
+            if (e.target.className == 'file-capture') {
+              let input = document.createElement('input')
+              input.type = 'file'
+              input.click()
+              input.addEventListener('change', () => {
+                let file = input.files[0]
+                if (file.type.match(/image.*/)) {
+                  openFile(file, drop, true, file.name)
+                } else {
+                  openFile(file, drop, false, file.name)
+                }
+                input.remove()
+              })
             }
           })
         }
