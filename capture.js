@@ -98,6 +98,7 @@
           parent.setAttribute('files', JSON.stringify(files))
           e.target.remove()
           indexReassign(drop)
+          if (drop.children.length == 0) drop.style.backgroundImage = `url(${UPLOAD_ICON})`
         })
       }
 
