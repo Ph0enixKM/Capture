@@ -9,7 +9,14 @@
     <div class="file-capture"></div>
     <input type="submit">
     <script>
-      let capture = new FileCapture({images: true})
+
+      let capture = new FileCapture({types: ['image'], size: 1})
+
+      capture.error = value => {
+        let message = document.createElement('p')
+        message. innerHTML = `File ${value} is incorrect!`
+        document.body.appendChild(message)
+      }
 
       let submit = document.querySelector('input')
       submit.addEventListener('click', () => {
