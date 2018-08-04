@@ -1,6 +1,6 @@
 {
   "name": "file-capture",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "The library gives you the ability to drag and drop files and get their contents on client-side!",
   "main": "capture.js",
   "scripts": {
