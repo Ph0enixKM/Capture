@@ -10,17 +10,25 @@
     <input type="submit">
     <script>
 
-      let capture = new FileCapture({types: ['image'], size: 1})
+      let capture = new FileCapture({types: [], size: 1})
 
       capture.error = value => {
         let message = document.createElement('p')
         message. innerHTML = `File ${value} is incorrect!`
         document.body.appendChild(message)
       }
+      setTimeout(()=>{
+        document.body.innerHTML += `
+          <div class="file-capture"></div>
+        `
+      }, 1000)
+      setTimeout(function () {
+        capture.update()
+      }, 1020);
 
       let submit = document.querySelector('input')
-      submit.addEventListener('click', () => {
-        alert(capture.getFiles())
+      window.addEventListener('keydown', (e) => {
+        if (e.key == 'k')console.log(capture.getFiles())
       })
 
     </script>
