@@ -35,7 +35,7 @@ let data = capture.getFiles()
 Customization can be provided in a configuration object. Here is an example:
 ```js
 let capture = new FileCapture({
-  types: ['image', 'audio', 'video', 'text', 'zip', 'application']
+  types: ['image', 'audio', 'video', 'text', 'zip', 'application'],
   // These types are just an example... you can use any media type you want
   size: 5
   // Size is being given in megabytes (MB)
