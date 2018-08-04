@@ -30,6 +30,11 @@ which returns a base64 of every uploaded file in one array
 ```js
 let data = capture.getFiles()
 ```
+If you want Capture to research for newly created file-capture elements,
+you can use this method:
+```js
+capture.update()
+```
 
 ## Configuration
 Customization can be provided in a configuration object. Here is an example:
