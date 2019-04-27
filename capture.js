@@ -25,11 +25,11 @@
     * @param {Number} object.size - File size (MB)
     * Default: false - which means file size is not being considered
     * 
-    * @param {Object} object.resize - Set maximum image width and heights
+    * @param {Object} object.resize - Set maximum image width heights
     * {
     *   maxWidth: 1000,
     *   maxHeight: 500
-    * }
+    * } 
   */
 
   window.FileCapture = class Main {
@@ -251,7 +251,7 @@
         canvas.height = size[1]
 
         c.drawImage(img, 0, 0, size[0], size[1])
-        let data = canvas.toDataURL('image/jpeg', 0.5)
+        let data = canvas.toDataURL('image/jpeg', 0.9)
         return data
       }
 
