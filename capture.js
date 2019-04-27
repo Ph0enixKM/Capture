@@ -259,13 +259,14 @@
     }
 
     async persistFile (file, drop, image, name) {
+      file = await this.optimizeFile(image, file)
+      
       let files = JSON.parse(drop.getAttribute('files'))
       let index = files.length
       drop.style.backgroundImage = 'none'
       files.push(file)
       drop.setAttribute('files', JSON.stringify(files))
 
-      file = await this.optimizeFile(image, file)
 
       let icon = document.createElement('div')
       icon.style.backgroundImage = `url('${(image) ? file : this.FILE_ICON}')`
