@@ -17,11 +17,19 @@
   /* Let's get to work */
   /**
     * @param {Object} object - Configuration object
+    * 
     * @param {Array} object.types - Media types you want to accept
-    ** Default: [] - which means all types are being accepted
-    ** Possibilities: ['image', 'audio', 'video', 'text', 'zip', 'application']
+    * Default: [] - which means all types are being accepted
+    * Possibilities: ['image', 'audio', 'video', 'text', 'zip', 'application']
+    * 
     * @param {Number} object.size - File size (MB)
-    ** Default: false - which means file size is not being considered
+    * Default: false - which means file size is not being considered
+    * 
+    * @param {Object} object.resize - Set maximum image width and heights
+    * {
+    *   maxWidth: 1000,
+    *   maxHeight: 500
+    * }
   */
 
   window.FileCapture = class Main {
@@ -29,6 +37,7 @@
       if (typeof obj !== 'undefined') {
         this.types = obj.types || []
         this.size = (obj.size) ? obj.size * 1000000 : false
+        this.resize = (typeof obj.resize === 'object') ? obj.resize : false
         this.error
       } else {
         // Default settings
@@ -189,12 +198,74 @@
       reader.readAsDataURL(file)
     }
 
-    persistFile (file, drop, image, name) {
+    loadImage(src) {
+      return new Promise(res => {
+        let image = new Image()
+        image.src = src
+        image.onload = () => {
+          return res(image)
+        }
+      })
+    }
+
+
+    /**
+     * img = [width, height]
+     */
+
+    resizeImage(img) {
+      console.log(img);
+      
+      if (img[0] > img[1]) {
+          if(img[0] > this.resize.maxWidth) {
+              let rate = this.resize.maxWidth / img[0]
+  
+              img[1] *= rate
+              img[0] = this.resize.maxWidth
+          }
+      }
+  
+      else {
+          if (img[1] > this.resize.maxHeight) {
+              let rate = this.resize.maxHeight / img[1]
+  
+              img[0] *= rate
+              img[1] = this.resize.maxHeight
+          }
+      }
+  
+      return img
+    }
+
+
+
+    async optimizeFile (isImage, src) {
+      if (isImage) {
+        let canvas = document.createElement('canvas')
+        let c = canvas.getContext('2d')
+        let img = await this.loadImage(src)
+        let size = this.resizeImage([img.width, img.height])
+
+        
+        canvas.width = size[0]
+        canvas.height = size[1]
+
+        c.drawImage(img, 0, 0, size[0], size[1])
+        let data = canvas.toDataURL('image/jpeg', 0.5)
+        return data
+      }
+
+      return src
+    }
+
+    async persistFile (file, drop, image, name) {
       let files = JSON.parse(drop.getAttribute('files'))
       let index = files.length
       drop.style.backgroundImage = 'none'
       files.push(file)
       drop.setAttribute('files', JSON.stringify(files))
+
+      file = await this.optimizeFile(image, file)
 
       let icon = document.createElement('div')
       icon.style.backgroundImage = `url('${(image) ? file : this.FILE_ICON}')`

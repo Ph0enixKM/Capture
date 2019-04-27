@@ -10,7 +10,13 @@
     <input type="submit">
     <script>
 
-      let capture = new FileCapture({types: [], size: 1})
+      let capture = new FileCapture({
+        types: [],
+        resize: {
+          maxWidth: 1000,
+          maxHeight: 1000
+        }
+      })
 
       capture.error = value => {
         let message = document.createElement('p')
